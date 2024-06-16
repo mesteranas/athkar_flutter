@@ -94,7 +94,7 @@ class _test extends State<test>{
             String thekr=athkarList[index].toString();
             return ListTile(title: Text(thekr),
             onTap:(){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>AthkarDialog(athkars: athkarMap.values.toList())));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>AthkarDialog(athkars: athkarMap.values.toList()[index])));
             } ,);
           }
         ,itemCount: athkarMap.keys.toList().length,

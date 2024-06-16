@@ -13,25 +13,35 @@ class _AthkarDialog extends State<AthkarDialog>{
   AudioPlayer audioPlayer=AudioPlayer();
   var _=Language.translate;
   bool isPlaying=false;
+  bool paused=false;
   String text="";
   int times=1;
   int index=0;
   String audio="";
   List<dynamic> athkars=[];
   _AthkarDialog(this.athkars);
+
   @override
   void initState(){
     super.initState();
     loadCurrentThekr();
+    loadAudio();
+  }
+  void loadAudio(){
+    audioPlayer.onPlayerComplete.listen((event) { 
+      isPlaying=false;
+      setState(() {
+        
+      });
+    });
   }
   void loadCurrentThekr() {
-    var current=athkars[0][index];
+    audioPlayer.stop();
+    isPlaying=false;
+    var current=athkars[index];
     text=current["text"];
     times=current["times"];
     audio=current["audio"];
-    setState(() {
-      
-    });
   }
   @override
   Widget build(BuildContext context){
@@ -50,11 +60,31 @@ class _AthkarDialog extends State<AthkarDialog>{
               loadCurrentThekr();
             }, child: Text(_("previous thekr"))),
             if (isPlaying==false)
-            ElevatedButton(onPressed: (){
-              // audioPlayer.play();
+            ElevatedButton(onPressed: () async{
+              await audioPlayer.play(UrlSource(audio));
               isPlaying=true;
-            }, child: Text(_("play"))),
-            if (index!=this.athkars[0].length-1)
+              setState(() {
+                
+              });
+            }, child: Text(_("play")))
+            else
+            if (paused==false)
+            ElevatedButton(onPressed: (){
+              paused=true;
+              audioPlayer.pause();
+              setState(() {
+                
+              });
+            }, child: Text(_("pause")))
+            else if (paused==true)
+            ElevatedButton(onPressed: (){
+              paused=false;
+              audioPlayer.resume();
+              setState(() {
+                
+              });
+            }, child: Text(_("resume"))),
+            if (index!=this.athkars.length-1)
             ElevatedButton(onPressed: (){
               index+=1;
               loadCurrentThekr();
