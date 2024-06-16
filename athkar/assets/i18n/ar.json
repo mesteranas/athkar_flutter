@@ -11,5 +11,12 @@
     "description:":"الوصف:",
     "settings":"الإعدادات",
     "general settings":"الإعدادات العامة",
-    "language":"اللغة"
+    "language":"اللغة",
+"athkar":"أذكار",
+"times":"مرات",
+"previous thekr":"الذكر السابق",
+"play":"تشغيل",
+"pause":"إيقاف مؤقت",
+"resume":"استئناف",
+"next thekr":"الذكر التالي"
 }
